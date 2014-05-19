@@ -147,7 +147,6 @@ class DataExportMixin(object):
             if display_field.total:
                 display_totals[display_field_key] = {'val': Decimal('0.00')}
 
-
         for i, display_field in enumerate(display_fields):
             model = get_model_from_path_string(model_class, display_field.path)
             if user.has_perm(model._meta.app_label + '.change_' + model._meta.module_name) \
@@ -156,7 +155,7 @@ class DataExportMixin(object):
                 # TODO: clean this up a bit
                 display_field_key = display_field.path + display_field.field
                 if '[property]' in display_field.field_verbose:
-                    property_list[i] = display_field_key
+                    property_list[i] = display_field_key.replace(' ', '_')
                     append_display_total(display_totals, display_field, display_field_key)
                 elif '[custom' in display_field.field_verbose:
                     custom_list[i] = display_field_key
