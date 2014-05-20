@@ -27,9 +27,8 @@ class DataExportMixin(object):
         ws.title = re.sub(r'\W+', '', sheet_name)[:30]
         if header:
             for i, header_cell in enumerate(header):
-                cell = ws.cell(row=0, column=i)
+                cell = ws.cell(row=1, column=i+1)
                 cell.value = header_cell
-                cell.style.font.bold = True
                 if widths:
                     ws.column_dimensions[get_column_letter(i+1)].width = widths[i]
 
@@ -477,4 +476,5 @@ class GetFieldsMixin(object):
         path += '__'
 
         return (new_fields, model_ct, path)
+
 
